@@ -1,9 +1,7 @@
+#include "fc_defs.h"
+
 #ifdef PYTHON
-// for one-line function definition
-#define _FD(name, body) def name(): return (body)
-#else
-// for one-line function definition
-#define _FD(name, body) static float name(){ return (body);}
+NF = 4 // just to have it declared.
 #endif
 
 
@@ -55,8 +53,8 @@ _FD(site_Cphi_assign_flops , 1.0/2*( 8*matrix_mul_flops() + \
 
 
 
-_FD( N , 2*NF);
-_FD( forward_substitution_loop_flop , N()*(N()-1)/2 * ((3 * real_op_flop()) + // n = i*(i+1)/2+i) \
+_FD( clover_matsize , 2*NF);
+_FD( forward_substitution_loop_flop , clover_matsize()*(clover_matsize()-1)/2 * ((3 * real_op_flop()) + // n = i*(i+1)/2+i) \
                                                      // _complex_mul_sub_assign(); )
                                                      (complex_mul_flops() + complex_sum_flops()) + \
                                                      // _complex_mul_sub_assign();)
@@ -71,9 +69,9 @@ float backward_substitution_loop_flop(){
 #endif
 
 #ifdef PYTHON
-    for i in range(N()-1,-1,-1):
+    for i in range(clover_matsize()-1,-1,-1):
 #else
-    for(int i = N()-1; i >= 0; i--){
+    for(int i = clover_matsize()-1; i >= 0; i--){
 #endif
         res += 3; // n = i*(i+1)/2+i);
         res += complex_mulR_flops();//_complex_mulr());
@@ -81,7 +79,7 @@ float backward_substitution_loop_flop(){
 #ifdef PYTHON
         for k in range(i+1,N()):
 #else
-        for(int k = i+1; k < N(); k++){
+        for(int k = i+1; k < clover_matsize(); k++){
 #endif
             res += 3; // n = k*(k+1)/2+i);
 

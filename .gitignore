@@ -1,3 +1,4 @@
-flop_count.c
-flop_count.py
+*_count.c
+*_count.py
+*_count.test.o
 __pycache__
