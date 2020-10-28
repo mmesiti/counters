@@ -21,14 +21,14 @@ To build the python modules, use
 #+BEGIN_SRC bash
 make python
 #+END_SRC
-`yapf` is used to reformat the output if available (not necessary).
+ = yapf =  is used to reformat the output if available (not necessary).
 *** C libraries
 The C files can be included or compiled without issues, but some symbols must be defined
-(i.e., `NF`, `T`, `X`, `Y`, `Z` and the size of the floating point datatype chosen, `REAL_SIZE`).
+(i.e.,  = NF = ,  = T = ,  = X = ,  = Y = ,  = Z =  and the size of the floating point datatype chosen,  = REAL_SIZE = ).
 #+BEGIN_SRC bash
 make c
 #+END_SRC
-`clang-format` is used to reformat the output is available (not necessary).
+ = clang-format =  is used to reformat the output is available (not necessary).
 *** Compilation of C libraries
 To test the compilation of the C code, use
 #+BEGIN_SRC bash
